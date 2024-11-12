@@ -10,7 +10,7 @@ import static java.lang.String.format;
 
 @RestController
 @RequestMapping("/annotations")
-
+@CrossOrigin(origins = "*") // Allows all origins temporarily
 public class AnnotationController {
     @Autowired
     private final AnnotationService service;

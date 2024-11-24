@@ -3,6 +3,7 @@ package com.example.annotation_backend.controller;
 import com.example.annotation_backend.entity.User;
 import com.example.annotation_backend.service.UserService;
 import com.example.annotation_backend.utils.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,13 +26,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
+    public String register(@Valid @RequestBody User user) {
         userService.registerUser(user);
         return "User registered successfully";
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public String login(@Valid @RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );

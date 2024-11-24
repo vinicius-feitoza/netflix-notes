@@ -18,13 +18,9 @@ public class AnnotationService {
         this.repository = repository;
     }
 
-    public Long create(Annotation annotation, User user) {
-        try {
-            annotation.setUser(user);
-            return repository.save(annotation).getId();
-        } catch (Exception e) {
-            throw e;
-        }
+    public Long create(Annotation annotation, User user)  {
+        annotation.setUser(user);
+        return repository.save(annotation).getId();
     }
 
     public Annotation getAnnotation(Long id) {

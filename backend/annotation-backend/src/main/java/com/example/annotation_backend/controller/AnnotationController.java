@@ -4,14 +4,13 @@ import com.example.annotation_backend.entity.Annotation;
 import com.example.annotation_backend.entity.User;
 import com.example.annotation_backend.service.AnnotationService;
 import com.example.annotation_backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-
-import static java.lang.String.format;
 
 @RestController
 @RequestMapping("/annotations")
@@ -29,7 +28,7 @@ public class AnnotationController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<String> createAnnotation(@RequestBody Annotation annotation, Principal principal) {
+    public ResponseEntity<String> createAnnotation(@Valid @RequestBody Annotation annotation, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
 

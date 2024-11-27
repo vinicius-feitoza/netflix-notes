@@ -8,61 +8,75 @@ let observer = null;
 
 
 function extractTitle() {
-    const titleElement = document.querySelector("div[data-uia='video-title']");
-    if (titleElement) {
-      let showTitle = '';
-      let episodeInfo = '';
-      let contentType = '';
-  
-      const h4Element = titleElement.querySelector('h4');
-      if (h4Element) {
-        contentType = 'TV Show';
-        showTitle = h4Element.textContent.trim();
-        episodeInfo = Array.from(titleElement.querySelectorAll('span'))
-          .map((span) => span.textContent.trim())
-          .join(' ');
-      } else {
-        contentType = 'Movie';
-        showTitle = titleElement.textContent.trim();
-      }
-  
-      const newTitle = [showTitle, episodeInfo].filter(Boolean).join(' - ');
-  
-      if (currentTitle !== newTitle || currentType !== contentType) {
-        currentTitle = newTitle;
-        currentType = contentType;
-        console.log('Current Title:', currentTitle);
-        console.log('Content Type:', currentType);
-  
-        stopObserving();
-      }
+  const titleElement = document.querySelector("div[data-uia='video-title']");
+  if (titleElement) {
+    let showTitle = '';
+    let episodeInfo = '';
+    let contentType = '';
+
+    const h4Element = titleElement.querySelector('h4');
+    if (h4Element && h4Element.textContent.trim() !== '') {
+      // TV show with a valid title
+      contentType = 'TV Show';
+      showTitle = h4Element.textContent.trim();
+      episodeInfo = Array.from(titleElement.querySelectorAll('span'))
+        .map((span) => span.textContent.trim())
+        .join(' ');
+    } else if (titleElement.textContent.trim() !== '') {
+      // Mmovie with a valid title
+      contentType = 'Movie';
+      showTitle = titleElement.textContent.trim();
     } else {
-      console.log('Title element not found');
+      console.log('Title element found but content is empty');
+      // Don't stop observing; content hasn't loaded yet
+      return;
     }
-  }  
+
+    const newTitle = [showTitle, episodeInfo].filter(Boolean).join(' - ');
+
+    if ((currentTitle !== newTitle || currentType !== contentType) && newTitle !== '') {
+      currentTitle = newTitle;
+      currentType = contentType;
+      console.log('Current Title:', currentTitle);
+      console.log('Content Type:', currentType);
+
+      // Stop observing only after successfully capturing the title
+      stopObserving();
+    } else {
+      console.log('Title not fully loaded yet or unchanged, continue observing');
+    }
+  } else {
+    console.log('Title element not found');
+  }
+}
+
 
 function startObserving() {
-  if (observer === null) {
-    observer = new MutationObserver((mutations) => {
-      for (let mutation of mutations) {
-        for (let node of mutation.addedNodes) {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const element = node;
-            if (
-              element.matches("div[data-uia='video-title']") ||
-              element.querySelector("div[data-uia='video-title']")
-            ) {
-              extractTitle();
-              break;
-            }
-          }
-        }
-      }
-    });
+  if (observer !== null) {
+    return;
   }
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  observer = new MutationObserver((mutations) => {
+    for (let mutation of mutations) {
+      if (
+        mutation.type === 'childList' ||
+        mutation.type === 'characterData' ||
+        mutation.type === 'attributes'
+      ) {
+        extractTitle();
+      }
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+    attributes: true,
+    characterDataOldValue: true,
+  });
 }
+
 
 function stopObserving() {
   if (observer !== null) {
@@ -72,12 +86,13 @@ function stopObserving() {
 }
 
 function onURLChange() {
-  console.log('URL changed detected');
+  console.log('URL change detected');
   currentTitle = '';
-  currentType ='';
+  currentType = '';
   stopObserving();
   startObserving();
 }
+
 
 function getTime() {
     const videoElement = document.querySelector('video');

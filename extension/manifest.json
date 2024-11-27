@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "A basic Chrome extension that allows the user to add personal notes to Netflix movies and shows.",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "login.html"
   },
   "permissions": ["activeTab", "scripting", "storage", "tabs"],
   "host_permissions": ["*://*.netflix.com/*"],

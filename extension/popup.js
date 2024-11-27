@@ -9,6 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
     messageDiv.textContent = '';
     messageDiv.className = '';
 
+    chrome.storage.local.get(['jwtToken'], function (result) {
+      if (!result.jwtToken) {
+        // If not authenticated, redirect to login page
+        window.location.href = 'login.html';
+      }
+    });
+
     if (!annotation) { 
       messageDiv.textContent = 'Please enter an annotation before saving.';
       messageDiv.classList.add('error');
@@ -44,30 +51,55 @@ document.addEventListener('DOMContentLoaded', function () {
             const videoTime = response.time;
 
             const annotationData = {
-              annotation: annotation,
-              url: url,
+              text: annotation,
               title: title,
-              type: type,
-              time: videoTime,
+              playerTime: videoTime,
+              videoType: type,
+              url: url,
               timestamp: new Date().toISOString(),
             };
 
-            // TODO: send annotationData to backend api
+            chrome.storage.local.get(['jwtToken'], function (result) {
 
-            annotationText.value = '';
+              const token = result.jwtToken;
+              console.log("O TOKEN AGORA SERA::::: " + token)
 
-            messageDiv.textContent = 'Annotation saved!';
-            messageDiv.classList.add('success');
-            
-            setTimeout(() => {
-            messageDiv.textContent = '';
-              messageDiv.className = '';
-            }, 3000);
-
-            console.log('Annotation Saved:', annotationData);
+              fetch('http://localhost:8080/annotations/create', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(annotationData)
+              })
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.text(); 
+              })
+              .then(data => {
+                messageDiv.textContent = 'Annotation saved!';
+                messageDiv.classList.add('success');
+                annotationText.value = '';
+          
+                setTimeout(() => {
+                  messageDiv.textContent = '';
+                  messageDiv.className = '';
+                }, 3000);
+          
+                console.log('Annotation Saved:', annotationData);
+              })
+              .catch(error => {
+                messageDiv.textContent = 'Error saving annotation. Please try again.';
+                messageDiv.classList.add('error');
+          
+                console.error('Error:', error);
+              });
+            });
           }
         );
-      }
-    );
-  });
-});
+      });
+    })
+  }
+);

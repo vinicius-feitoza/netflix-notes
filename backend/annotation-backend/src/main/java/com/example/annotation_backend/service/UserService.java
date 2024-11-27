@@ -1,5 +1,6 @@
 package com.example.annotation_backend.service;
 
+import com.example.annotation_backend.dto.RegisterRequest;
 import com.example.annotation_backend.entity.User;
 import com.example.annotation_backend.repository.UserRepository;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,7 +22,12 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(User user) {
+    public User registerUser(RegisterRequest registerRequest) {
+
+        final User user = new User();
+        user.setUsername(registerRequest.getUsername());
+        user.setPassword(registerRequest.getPassword());
+
         // Check if username already exists
         if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new RuntimeException("Username already exists");

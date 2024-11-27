@@ -38,7 +38,7 @@ public class UserController {
         }
 
         userService.registerUser(registerRequest);
-        return ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.status(201).body("User registered successfully");
     }
 
     @PostMapping("/login")

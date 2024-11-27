@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class UserService implements UserDetailsService {
         final User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(registerRequest.getPassword());
+        user.setDateCreated(LocalDateTime.now());
 
         // Check if username already exists
         if (userRepository.findByUsername(user.getUsername()) != null) {

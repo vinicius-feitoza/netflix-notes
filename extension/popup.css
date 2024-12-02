@@ -1,38 +1,67 @@
 body {
-    min-width: 300px;
-    min-height: 200px;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 10px;
-  }
-  
-  #container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #annotationText {
-    flex: 1;
-    margin-bottom: 10px;
-    padding: 5px;
-    font-size: 14px;
-  }
-  
-  #saveButton {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  #message {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  #message.error {
-    color: red;
-  }
-  
-  #message.success {
-    color: green;
-  }  
+  background-color: #141414;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+#container {
+  background-color: #FFFFFF;
+  color: #000000;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  resize: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#loginButton, #registerButton, #saveButton {
+  background-color: #E50914;
+  color: white;
+}
+
+#createAccountButton, #backToLoginButton {
+  background-color: #e5e5e5;
+  color: black;
+}
+
+#message {
+  font-size: 14px;
+}
+
+#message.error {
+  color: red;
+}
+
+#message.success {
+  color: green;
+}

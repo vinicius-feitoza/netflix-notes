@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const saveButton = document.getElementById('saveButton');
   const annotationText = document.getElementById('annotationText');
   const messageDiv = document.getElementById('message');
+  const myAnnotationsButton = document.getElementById('myAnnotationsButton');
+
 
   saveButton.addEventListener('click', function () {
     const annotation = annotationText.value.trim();
@@ -101,5 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       });
     })
-  }
-);
+    myAnnotationsButton.addEventListener('click', function () {
+      window.location.href = 'annotations.html';
+    });
+  });

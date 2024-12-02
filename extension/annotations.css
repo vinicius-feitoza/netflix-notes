@@ -1,0 +1,87 @@
+body {
+    background-color: #141414;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    height: 300px; /* Set a fixed height for the popup */
+    overflow: hidden; /* Prevent extra content from showing */
+  }
+
+  #container {
+    background-color: #FFFFFF;
+    color: #000000;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    height: 100%; /* Match container to the body height */
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+  }
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.show-group {
+    margin-bottom: 10px;
+}
+
+button.collapsible {
+    width: 100%;
+    background-color: #E50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button.collapsible:hover {
+    background-color: #b00710;
+}
+
+.content {
+    display: none;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.annotation {
+    background: #e5e5e5;
+    color: black;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.annotation .player-time {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.annotation p {
+    margin: 5px 0;
+}
+
+.annotation button {
+    background: #E50914;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.annotation button:hover {
+    background: #b00710;
+}

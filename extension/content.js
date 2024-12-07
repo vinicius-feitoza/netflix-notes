@@ -3,6 +3,7 @@ console.log('Netflix Notes Extension: Content script injected');
 let currentTitle = '';
 let currentType = '';
 let currentTime = '';
+let currentEpisodeInfo = ''; // should i add this here?
 let lastURL = window.location.href;
 let observer = null;
 
@@ -23,7 +24,7 @@ function extractTitle() {
         .map((span) => span.textContent.trim())
         .join(' ');
     } else if (titleElement.textContent.trim() !== '') {
-      // Mmovie with a valid title
+      // Movie with a valid title
       contentType = 'Movie';
       showTitle = titleElement.textContent.trim();
     } else {
@@ -32,13 +33,13 @@ function extractTitle() {
       return;
     }
 
-    const newTitle = [showTitle, episodeInfo].filter(Boolean).join(' - ');
-
-    if ((currentTitle !== newTitle || currentType !== contentType) && newTitle !== '') {
-      currentTitle = newTitle;
+    if ((currentTitle !== showTitle || currentType !== contentType || currentEpisodeInfo !== episodeInfo) && showTitle !== '') {
+      currentTitle = showTitle;
       currentType = contentType;
+      currentEpisodeInfo = episodeInfo;
       console.log('Current Title:', currentTitle);
       console.log('Content Type:', currentType);
+      console.log('Content EpisodeInfo:', currentEpisodeInfo);
 
       // Stop observing only after successfully capturing the title
       stopObserving();
@@ -89,6 +90,7 @@ function onURLChange() {
   console.log('URL change detected');
   currentTitle = '';
   currentType = '';
+  currentEpisodeInfo = '';
   stopObserving();
   startObserving();
 }
@@ -119,7 +121,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'getTitleAndType') {
       if (currentTitle && currentType) {
         getTime();
-        sendResponse({ title: currentTitle, type: currentType, time: currentTime });
+        sendResponse({ title: currentTitle, type: currentType, episodeInfo: currentEpisodeInfo, time: currentTime });
       } else {
         sendResponse({
           error:

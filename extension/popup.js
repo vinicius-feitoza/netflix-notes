@@ -51,12 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = response.title;
             const type = response.type;
             const videoTime = response.time;
+            const episodeInfo = response.episodeInfo;
 
             const annotationData = {
               text: annotation,
               title: title,
               playerTime: videoTime,
               videoType: type,
+              episodeInfo: episodeInfo,
               url: url,
               timestamp: new Date().toISOString(),
             };
@@ -64,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
             chrome.storage.local.get(['jwtToken'], function (result) {
 
               const token = result.jwtToken;
-              console.log("O TOKEN AGORA SERA::::: " + token)
 
               fetch('http://localhost:8080/annotations/create', {
                 method: 'POST',

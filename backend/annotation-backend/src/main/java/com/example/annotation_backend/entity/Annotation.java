@@ -23,6 +23,7 @@ public class Annotation {
     public Double playerTime;
     @NotBlank(message = "Video type is required")
     public String videoType;
+    public String episodeInfo;
     @NotBlank(message = "URL is required")
     public String url;
     public LocalDateTime timestamp;

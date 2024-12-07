@@ -1195,3 +1195,63 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/pessoal/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 150 more
+2024-12-07 17:08:14.560455-03:00 database: close
+org.h2.message.DbException: IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.onShutdown(Database.java:1158)
+	at org.h2.engine.OnExitDatabaseCloser.onShutdown(OnExitDatabaseCloser.java:85)
+	at org.h2.engine.OnExitDatabaseCloser.run(OnExitDatabaseCloser.java:114)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 8 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 6 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 13 more
+2024-12-07 17:16:53.022513-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/70170051?trackId=14170286&tctx=2%2C0%2Ca8c35206-d... (304)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:16:57.899734-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/70170051?trackId=14170286&tctx=2%2C0%2Ca8c35206-d... (304)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:17:12.922404-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/70170051?trackId=14170286&tctx=2%2C0%2Ca8c35206-d... (304)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:20:16.491764-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/70170051?trackId=14170286&tctx=2%2C0%2Ca8c35206-d... (304)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:20:18.585538-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/70170051?trackId=14170286&tctx=2%2C0%2Ca8c35206-d... (304)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:27:25.453280-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/80004178?trackId=14170286&tctx=2%2C1%2Cf9c65be1-e... (296)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:27:52.222345-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/80004178?trackId=14170286&tctx=2%2C1%2Cf9c65be1-e... (296)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:27:53.334528-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/80004178?trackId=14170286&tctx=2%2C1%2Cf9c65be1-e... (296)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2024-12-07 17:28:21.824528-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL CHARACTER VARYING(255)": "'https://www.netflix.com/watch/80004178?trackId=14170286&tctx=2%2C1%2Cf9c65be1-e... (296)"; SQL statement:
+insert into annotations (episode_info,player_time,text,timestamp,title,url,user_id,video_type,id) values (?,?,?,?,?,?,?,?,default) [22001-232]

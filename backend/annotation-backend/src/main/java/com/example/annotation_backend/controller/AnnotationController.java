@@ -1,5 +1,6 @@
 package com.example.annotation_backend.controller;
 
+import com.example.annotation_backend.dto.AnnotationResponse;
 import com.example.annotation_backend.entity.Annotation;
 import com.example.annotation_backend.entity.User;
 import com.example.annotation_backend.service.AnnotationService;
@@ -54,5 +55,14 @@ public class AnnotationController {
     @GetMapping("/all")
     public ResponseEntity<List<Annotation>> getAllAnnotations() {
         return ResponseEntity.status(200).body(annotationService.getAllAnnotations());
+    }
+
+    @GetMapping("/grouped")
+    public ResponseEntity<List<AnnotationResponse>> getAnnotationsGroupedByTitle(Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUsername(username);
+
+        List<AnnotationResponse> groupedAnnotations = annotationService.getGroupedAnnotations(user);
+        return ResponseEntity.ok(groupedAnnotations);
     }
 }

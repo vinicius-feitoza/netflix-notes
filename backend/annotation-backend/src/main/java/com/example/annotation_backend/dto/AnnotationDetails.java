@@ -1,10 +1,12 @@
 package com.example.annotation_backend.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class AnnotationGrouped {
-    private String seasonEpisode;
+@Builder
+public class AnnotationDetails {
+    private String episodeInfo;
     private String playerTime;
     private String text;
 }

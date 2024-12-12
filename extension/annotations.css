@@ -7,8 +7,8 @@ body {
     align-items: center;
     height: 100vh;
     color: white;
-    height: 300px; /* Set a fixed height for the popup */
-    overflow: hidden; /* Prevent extra content from showing */
+    height: 300px;
+    overflow: hidden; 
   }
 
   #container {
@@ -19,9 +19,38 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    height: 100%; /* Match container to the body height */
-    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    height: 100%; 
+    overflow-y: auto;
   }
+
+  #backButton {
+    background-color: #e5e5e5;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: block;
+    text-align: left;
+}
+
+#backButton:hover {
+    background-color: #d3d3d3;
+}
+
+.annotation .tv-button {
+    background-color: #d6d6d6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right; 
+}
+
+.annotation .tv-button:hover {
+    background-color: #cacaca;
+} 
 
 h1 {
     font-size: 24px;

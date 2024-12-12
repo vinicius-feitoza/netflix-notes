@@ -1,5 +1,7 @@
 console.log("annotations.js loaded");
 
+const backButton = document.getElementById('backButton');
+
 function fetchAnnotations() {
   chrome.storage.local.get(['jwtToken'], function(result) {
     const token = result.jwtToken;
@@ -81,7 +83,15 @@ function displayAnnotations(shows) {
       const annotationText = document.createElement('p');
       annotationText.textContent = annotation.text;
 
+      const watchButton = document.createElement('button');
+      watchButton.className = 'tv-button';
+      watchButton.innerHTML = '▶';
+      watchButton.onclick = () => {
+          goToUrl(show.title, annotation.url);
+      };
+
       annotationDiv.appendChild(playerTimeSpan);
+      annotationDiv.appendChild(watchButton);
       annotationDiv.appendChild(annotationText);
 
       contentDiv.appendChild(annotationDiv);
@@ -92,6 +102,21 @@ function displayAnnotations(shows) {
     mainContainer.appendChild(showGroup);
   });
 }
+
+function goToUrl(showTitle, url) {
+  console.log(`Navigating to ${showTitle} at ${url}`);
+  // if current tab is netflix, it will open on the same tab. otherwise, it will open new tab
+  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    const activeTab = tabs[0];
+    if (activeTab && activeTab.url && activeTab.url.includes("netflix.com")) {
+      chrome.tabs.update(activeTab.id, { url: url });
+    } else {
+      chrome.tabs.create({ url: url });
+    }
+  });
+}
+
+
 
 function attachCollapsibleLogic() {
   const collapsibles = document.querySelectorAll(".show-group button.collapsible");
@@ -109,5 +134,9 @@ function attachCollapsibleLogic() {
     });
   });
 }
+
+backButton.addEventListener('click', function () { 
+  window.location.href = "popup.html";
+});
 
 fetchAnnotations();

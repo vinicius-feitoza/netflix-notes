@@ -56,6 +56,7 @@ public class AnnotationService {
                     .episodeInfo(episodeInfo)
                     .playerTime(formattedPlayerTime)
                     .text(annotation.getText())
+                    .url(annotation.getUrl())
                     .build();
 
             showsMap.computeIfAbsent(title, k -> new ArrayList<>()).add(annotationDetails);

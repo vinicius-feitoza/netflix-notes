@@ -62,4 +62,10 @@ public class UserController {
     public List<User> all() {
         return userService.getAllUsers();
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 }

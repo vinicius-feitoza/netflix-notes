@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "My Netflix Notes Extension",
+  "name": "My Netflix Notes",
   "version": "1.0",
   "description": "A basic Chrome extension that allows the user to add personal notes to Netflix movies and shows.",
   "action": {
@@ -10,6 +10,14 @@
   "host_permissions": ["*://*.netflix.com/*"],
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "32": "icons/icon32.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "content_scripts": [
     {

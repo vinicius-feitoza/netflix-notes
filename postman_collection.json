@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "29f27aba-bffd-41b7-b303-3ba1801e7016",
+		"name": "netflix-notes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29623525"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"vi5\",\n    \"password\": \"1234\",\n    \"confirmPassword\": \"1232\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"user3\", \"password\": \"1234\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/delete/65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"delete",
+								"65"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "annotations",
+			"item": [
+				{
+					"name": "Create annotation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMyIsImlzcyI6InlvdXJfYXBwX25hbWUiLCJpYXQiOjE3MzI0MDg0NzYsImV4cCI6MTczMjQ5NDg3Nn0.LWEIlIA3pItMQoGdP-nGJF9XBiKEq0vba4BbwOuzDxkb-Eir2H_90R9dnOS1P526OzDPBgzGF1p8RnWo_JX4xg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": 1234,\n  \"url\": \"https://www.example.com/video/123\",\n  \"title\": \"Sample Video\",\n  \"videoType\": \"Video\",\n  \"timestamp\": \"2024-11-03T17:40:27.770Z\",\n  \"playerTime\": 1234\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/annotations/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"annotations",
+								"create"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST http://localhost:8080/annotations/create \\\n-H 'Content-Type: application/json' \\\n-H 'Authorization: Bearer your_jwt_token' \\\n-d '{\n  \"annotation\": \"Sample annotation text\",\n  \"url\": \"https://www.example.com/video/123\",\n  \"title\": \"Sample Video\",\n  \"type\": \"Video\",\n  \"time\": 200.85,\n  \"timestamp\": \"2024-11-03T17:40:27.770Z\"\n}'\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Annotations from User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/annotations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"annotations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get annotations from user grouped by title",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/annotations/grouped",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"annotations",
+								"grouped"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all annotations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/annotations/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"annotations",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get annotation by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/annotations/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"annotations",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
